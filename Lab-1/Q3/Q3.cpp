@@ -1,17 +1,12 @@
 #include <iostream>
+#include <vector>
 #define int long long
 using namespace std;
 
-const int n = 4;
+int n;
 
-int adj[n][n] = {   
-    { 0, 20, 42, 35 },
-    { 20, 0, 30, 34 }, 
-    { 42, 30, 0, 12 },
-    { 35, 34, 12, 0 },
-};
-
-int dp[n][(1 << n)];
+vector<vector<int>> adj;
+vector<vector<int>> dp;
 
 int func(int i, int s){
     if(dp[i][s] != 0)
@@ -28,8 +23,22 @@ int func(int i, int s){
 }
 
 signed main(){
-    int ans = INT_MAX;
-    for(int j=1; j<n; j++)
-        ans = min(ans, func(j, (1 << n)-1) + adj[j][0]);
-    cout << ans << endl;
+    freopen("test_cases_Q3.txt","r",stdin);
+    freopen("output_Q3.txt","w",stdout);
+    int t; cin >> t;
+    while(t--){
+        cin >> n;
+        dp.resize(n);
+        adj.resize(n);
+        for(int i=0; i<n; i++){
+            adj[i].resize(n);
+            for(int j=0; j<n; j++)
+                cin >> adj[i][j];
+            dp[i].resize(1 << n);
+        }
+        int ans = INT_MAX;
+        for(int j=1; j<n; j++)
+            ans = min(ans, func(j, (1 << n)-1) + adj[j][0]);
+        cout << ans << endl;
+    }
 }
