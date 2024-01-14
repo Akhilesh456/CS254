@@ -35,6 +35,8 @@ signed main(){
             for(int j=0; j<n; j++)
                 cin >> adj[i][j];
             dp[i].resize(1 << n);
+            for(int j=0; j<(1<<n); j++)
+                dp[i][j] = 0;
         }
         int ans = INT_MAX;
         for(int j=1; j<n; j++)
