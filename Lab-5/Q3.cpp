@@ -26,25 +26,16 @@ int main(){
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 bool c; cin >> c;
-                adj[i][j] = !c;
+                if(i != j)
+                    adj[i][j] = !c;
             }
         }
         vector<int> cans(n, -1);
-        int ans = -1, d = 0;
-        for(int i=0; i<n; i++){
-            if(cans[i] == -1){
-                if(ans != -1){
-                    cout << "No\n"; d = 1;
-                    break;
-                }
-                if(is_bipartite(i, 0, cans, adj))
-                    ans = 1;
-                else
+        int ans = 1;
+        for(int i=0; i<n; i++)
+            if(cans[i] == -1)
+                if(!is_bipartite(i, 0, cans, adj))
                     ans = 0;
-            }
-        }
-        if(d)
-            continue;
         if(ans)
             cout << "Yes\n";
         else
