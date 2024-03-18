@@ -26,15 +26,23 @@ void lsort(vector<long long> &a, int m){
     int n = a.size();
     int i = 0, j = m, k = 0;
     long long md = 10000000000;
-    while(k < n){
-        if(j == n || (a[i]%md) < (a[j]%md)){
+    while(i < m && j < n){
+        if((a[i]%md) < (a[j]%md)){
             a[k] += md*(a[i]%md); 
             i++; k++;
         }
-        else if(i == m || (a[i]%md) >= (a[j]%md)){
+        else{
             a[k] += md*(a[j]%md);
             j++; k++;
         }
+    }
+    while(i < m){
+        a[k] += md*(a[i]%md); 
+        i++; k++;
+    }
+    while(j < n){
+        a[k] += md*(a[j]%md);
+        j++; k++;
     }
     for(int i=0; i<n; i++)
         a[i] = (a[i]/md);
