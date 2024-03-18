@@ -5,12 +5,16 @@ vector<int> Merge(vector<int> &a, vector<int> &b){
     int n = a.size(), m = b.size();
     vector<int> c(n+m);
     int i=0, j=0, k=0;
-    while(k < m+n){
-        if(j == m || a[i] <= b[j])
+    while(i<n && j<m){
+        if(a[i] < b[j])
             c[k++] = a[i++];
-        if(i == n || a[i] > b[j])
+        else
             c[k++] = b[j++];
     }
+    while(i < n)
+        c[k++] = a[i++];
+    while(j < m)
+        c[k++] = b[j++];
     return c;
 }
 
