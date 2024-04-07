@@ -1,6 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int maximum_cost_greedy(int max_weight, vector<int> &weights, vector<int> &values){
+    int n = weights.size(), ans = 0;
+    vector<int> items(n);
+    iota(items.begin(), items.end(), 0);
+    sort(items.begin(), items.end(), [&](int a, int b){
+        return values[a]/weights[a] < values[b]/weights[b];
+    });
+    for(auto i:items){
+        if(weights[i] >= max_weight){
+            ans += values[i];
+            max_weight -= weights[i];
+        }
+    }
+    return ans;
+}
+
 int maximum_cost(int max_weight, vector<int> &weights, vector<int> &values){
     int n = weights.size();
     vector<int> dp(max_weight+1);
